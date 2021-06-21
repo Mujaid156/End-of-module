@@ -5,6 +5,7 @@ from tkinter import *
 from tkinter import messagebox
 from random import sample
 from itertools import chain
+from playsound import playsound
 
 lotto_draw = Tk()
 lotto_draw.title("Lottery Draw")
@@ -155,7 +156,8 @@ class lottery:
         self.num49.place(x=475, y=550)
 
     def claim(self):
-        return lotto_draw.destroy()
+        lotto_draw.destroy()
+        import bank
 
     def again(self):
         self.guess1.config(text='')
@@ -206,6 +208,9 @@ class lottery:
                 self.results.config(text='Your numbers are: ' + '\n' + str(numbers) + '\n' + 'Winning numbers are: ' + str(lotto_numbers) + "\n" + 'You are a R10 000 000 richer')
             else:
                 self.results.config(text='You are unlucky, try again when you are feeling lucky')
+            winnings = open("info.txt", "a+")
+            winnings.write(self.results.cget("text") + "\n")
+            winnings.close()
         finally:
             return 'nothing'
 

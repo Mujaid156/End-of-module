@@ -5,11 +5,13 @@ from tkinter import *
 from datetime import datetime
 from tkinter import messagebox
 from email_validator import validate_email, EmailNotValidError
+from playsound import playsound
 
 lotto = Tk()
 lotto.title("Lottery")
 lotto.geometry("500x700")
 lotto.config(bg="#ffcc00")
+
 
 class login:
     def __init__(self, master):
@@ -67,6 +69,7 @@ class login:
 
         except EmailNotValidError:
             messagebox.showerror("Invalid Entry", "Please enter correct email")
+            playsound('erro.mp3')
 
         try:
             age = datetime.today()
@@ -79,20 +82,25 @@ class login:
                     import lotto_draw
                 elif age_valid != 18:
                     messagebox.showerror("You don not qualify", "Sorry, you are not there yet.")
+                    playsound('erro.mp3')
                     break
                 elif self.id_input.get() != 13:
                     messagebox.showerror("ID number invalid", "Please try again.")
+                    playsound('erro.mp3')
                     break
         except ValueError:
             messagebox.showerror("Invalid entry", "Please only use numbers.")
+            playsound('erro.mp3')
 
     def clear(self):
+        playsound('button-28.mp3')
         self.name_input.delete(0, END)
         self.email_input.delete(0, END)
         self.address_input.delete(0, END)
         self.id_input.delete(0, END)
 
     def exit_program(self):
+        playsound('windows-xp-startup.mp3')
         return lotto.destroy()
 
 
